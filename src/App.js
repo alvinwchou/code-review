@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import ApiCall from "./ApiCall";
+import Form from "./Form";
+import { useState } from "react";
+
 import './App.css';
 
+
 function App() {
+  const [searchParams, setSearchParams] = useState(null);
+
+  const getSearchParams = (e, filter) => {
+    e.preventDefault();
+    setSearchParams(filter);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <section className="header">
+        <div className="title">
+          <h1>A Recipe for Success</h1>
+        </div>
+        <Form handleSubmit={getSearchParams}/>
+      </section>
+      <section className="main">
+        <ApiCall params={searchParams}/>
+      </section>
+      <section className="footer">
+        <p>Created by <a href="https://www.alvinwchou.com/">Alvin Chou</a> at <a href="https://junocollege.com/">Juno College</a></p>
+      </section>
     </div>
   );
-}
+};
 
 export default App;
